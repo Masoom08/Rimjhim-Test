@@ -20,6 +20,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.abhishekagrahari.questionbank.model.DifficultyLevel
 import dev.abhishekagrahari.questionbank.model.Question
 import dev.abhishekagrahari.questionbank.viewmodel.QuestionViewModel
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,9 +36,14 @@ fun AddQuestionScreen(viewModel: QuestionViewModel = viewModel(), onNavigateBack
     var newOptionText by remember { mutableStateOf("") }
     var options by remember { mutableStateOf(mutableListOf<String>()) }
     var createdBy by remember { mutableStateOf("admin") }
+    val scrollState = rememberScrollState()
+
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         CustomTextField(
